@@ -49,7 +49,7 @@ public class StudentController {
         userBaseInfo.setThumb("https://syimg.3dmgame.com/uploadimg/upload/image/20210413/20210413154821_24226.jpg");
         boolean result = baseInfoService.insertBaseInfo(userBaseInfo);
 
-        return "addStudentPage";
+        return "forward:studentInfo";
     }
 
     @RequestMapping("/deleteStudent")

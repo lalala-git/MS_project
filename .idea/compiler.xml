@@ -9,11 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ms_protal" />
         <module name="MS_protal" />
+        <module name="MS_Project" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="MS_Project" options="-parameters" />
       <module name="MS_protal" options="-parameters" />
       <module name="ms_protal" options="-parameters" />
     </option>
