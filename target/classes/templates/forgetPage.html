@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>//开启弹出框
+        $(function () {
+            $("[data-toggle='popover']").popover();
+        });
+    </script>
+
+    <div class="container" style="border: 1px red solid; margin-top: 200px; border-radius: 10px; background-image: linear-gradient(#f00d05, #f7f301);">
+        <div class="row h4">
+            <span class="back glyphicon glyphicon-share-alt col-md-offset-11 col-md-1 text-center" style="text-decoration: none;"></span>
+        </div>
+        <form class="form-horizontal" role="form" action="forgetProcess" method="POST">
+            <!-- 账号 -->
+            <div class="form-group">
+                <label for="email" class="col-md-offset-3 col-md-1 h4 text-right">
+                    <span class="glyphicon glyphicon-envelope h1"></span>
+                </label>
+                <div class="col-md-4">
+                    <input name="email" id="email" class="form-control input-lg" placeholder="Email" style="margin-top: 28px"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-2 text-center" style="margin-bottom: 30px;">
+                    <span id="display" class="find btn btn-success">找回密码</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementsByClassName("back")[0].onclick = function() {
+            history.back();
+        }
+        document.getElementsByClassName("find")[0].onclick = function() {
+            var email = document.getElementById("email").value;
+
+            var xmlHttp = new XMLHttpRequest();
+
+            xmlHttp.onreadystatechange = function() {
+                if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                    if(xmlHttp.response === 'true') {
+                        alert("链接已发送至邮箱，请查收");
+                    } else {
+                        alert("邮件发送失败，请检查email并重试");
+                    }
+                }
+            }
+
+            xmlHttp.open("GET", "/forgetProcess?email=" + email, true);
+
+            xmlHttp.send();
+
+        }
+    </script>
+</body>
+</html>

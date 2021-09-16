@@ -1,0 +1,47 @@
+server:
+  port: 8899
+spring:
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false
+  datasource:
+    url: jdbc:mysql://182.42.113.36:3306/ms?serverTimezone=CST&characterEncoding=UTF-8&useSSL=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mail:
+    host: smtp.qq.com
+    username: 2741387650@qq.com
+    password: ragwxaqdofsyddhc
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  redis:
+    host: 182.42.113.36
+    port: 6379
+    password: 123456
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+#邮件链接常量
+baseUrl: http://182.42.113.36:8899/changeProcess
+#数据库加密盐常量
+salt: HelloWorld
+#一页大小
+pageSize: 8

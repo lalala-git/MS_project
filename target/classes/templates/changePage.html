@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    
+    <div class="container" style="border: 1px red solid; margin-top: 150px; border-radius: 10px; background-image: linear-gradient(#05f0e9, #f77001)">
+       
+        <form class="form-horizontal" role="form" action="changePassword" method="POST">
+            <input id="token" type="hidden" name="token" th:value="${token}"/>
+            <!-- 账号 -->
+            <div class="form-group" style="margin-top: 25px">
+                <label for="email" class="col-md-offset-3 col-md-1 h4 text-right">
+                    <span class="glyphicon glyphicon-envelope h1"></span>
+                </label>
+                <div class="col-md-4">
+                    <input id="email" name="email" class="form-control input-lg" placeholder="Email" style="margin-top: 28px"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-md-offset-3 col-md-1 h4 text-right">
+                    <span class="glyphicon glyphicon-lock" style="font-size:30px; margin-top: 25px"></span>
+                </label>
+                <div class="col-md-4">
+                    <input id="password" name="password" class="form-control input-lg" placeholder="Password" style="margin-top: 28px"/>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top: 40px">
+                <div class="col-md-offset-5 col-md-2 text-center" style="margin-bottom: 30px;">
+                    <span id="submit" class="find btn" style="background: #00dcff; border-radius: 5px">确认修改</span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("submit").onclick = function() {
+            var token = document.getElementById("token").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            var xmlHttp = new XMLHttpRequest();
+
+            xmlHttp.onreadystatechange = function() {
+                if(xmlHttp.readyState === 4 && xmlHttp.status === 200) {
+                    if(xmlHttp.response == '1') {
+                        alert("email输入错误，请检查email");
+                    } else if (xmlHttp.response == '2') {
+                        alert("链接失效，超时或已修改");
+                    } else if(xmlHttp.response == '3') {
+                        alert("密码修改成功");
+                    } else {
+                        alert("密码修改失败，请重试");
+                    }
+                }
+            }
+
+            xmlHttp.open("GET", "/changePassword?email="+email+"&token="+token+"&password="+password, true);
+
+            xmlHttp.send();
+
+        }
+    </script>
+
+</body>
+</html>

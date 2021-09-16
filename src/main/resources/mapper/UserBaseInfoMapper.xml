@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyds.dao.UserBaseInfoDao">
+    <resultMap id="UserMap" type="userBaseInfo">
+        <id property="userId" column="t_user_id"/>
+        <result property="email" column="t_email"/>
+        <result property="name" column="t_name"/>
+        <result property="password" column="t_password"/>
+        <result property="thumb" column="t_thumb"/>
+        <result property="position" column="t_position"/>
+        <result property="age" column="t_age"/>
+        <result property="sex" column="t_sex"/>
+        <result property="bir" column="t_bir"/>
+        <result property="constellation" column="t_constellation"/>
+        <result property="phone" column="t_phone"/>
+    </resultMap>
+    <select id="selectUserByEmail" resultMap="UserMap">
+        select * from user_base_info where t_email = #{email}
+    </select>
+
+    <update id="updatePasswordByEmail">
+        update user_base_info set t_password = #{password} where t_email = #{email}
+    </update>
+
+    <update id="updateBaseInfoByEmail" parameterType="userBaseInfo">
+        update user_base_info
+        <set>
+            <if test="user.thumb != null">t_thumb = #{user.thumb}, </if>
+            <if test="user.age != null">t_age = #{user.age}, </if>
+            <if test="user.sex != null">t_sex = #{user.sex}, </if>
+            <if test="user.bir != null">t_bir = #{user.bir}, </if>
+            <if test="user.constellation != null">t_constellation = #{user.constellation}, </if>
+            <if test="user.phone != null">t_phone = #{user.phone}, </if>
+        </set>
+        where t_email = #{user.email}
+    </update>
+
+    <resultMap id="PageMap" type="teacherBaseInfo">
+        <id property="userId" column="t_user_id"/>
+        <result property="email" column="t_email"/>
+        <result property="name" column="t_name"/>
+        <result property="phone" column="t_phone"/>
+    </resultMap>
+    <select id="selectAllTeacher" resultMap="PageMap">
+        select * from user_base_info where t_position = 1
+    </select>
+    <select id="selectAllStudent" resultMap="PageMap">
+        select * from user_base_info where t_position = 2
+    </select>
+
+    <update id="deleteBaseInfo">
+        delete from user_base_info where t_user_id = #{userId}
+    </update>
+
+    <insert id="insertBaseInfo" parameterType="userBaseInfo">
+        insert into user_base_info values(
+            null,
+            #{userBaseInfo.email},
+            #{userBaseInfo.name},
+            #{userBaseInfo.password},
+            #{userBaseInfo.thumb},
+            #{userBaseInfo.position},
+            #{userBaseInfo.age},
+            #{userBaseInfo.sex},
+            #{userBaseInfo.bir},
+            #{userBaseInfo.constellation},
+            #{userBaseInfo.phone}
+        )
+    </insert>
+
+    <update id="updateTeacherByUserId" parameterType="userBaseInfo">
+        update user_base_info
+        <set>
+            <if test="user.name != null">t_name = #{user.name}, </if>
+            <if test="user.phone != null">t_phone = #{user.phone}, </if>
+        </set>
+        where t_user_id = #{user.userId}
+    </update>
+
+</mapper>

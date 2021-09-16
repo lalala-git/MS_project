@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mabatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <!--解决n+1问题-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.yyds.domain.UserBaseInfo" alias="userBaseInfo"/>
+        <typeAlias type="com.yyds.domain.TeacherBaseInfo" alias="teacherBaseInfo"/>
+        <typeAlias type="com.yyds.domain.StudentScoreInfo" alias="studentScoreInfo"/>
+        <typeAlias type="com.yyds.domain.TeacherSubjectInfo" alias="teacherSubjectInfo"/>
+        <typeAlias type="com.yyds.domain.SubjectDetail" alias="subjectDetail"/>
+        <typeAlias type="com.yyds.domain.StudentSubjectInfo" alias="studentSubjectInfo"/>
+    </typeAliases>
+
+    <plugins>
+        <!--分页插件-->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+
+    <mappers>
+        <mapper resource="mapper/UserBaseInfoMapper.xml"/>
+        <mapper resource="mapper/StudentScoreInfoMapper.xml"/>
+        <mapper resource="mapper/TeacherSubjectInfoMapper.xml"/>
+    </mappers>
+</configuration>

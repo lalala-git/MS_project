@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script language="javascript">
+        //登录页出现在iframe中
+        if(top.location !== self.location) {
+            top.location.href = self.location.href;
+        }
+        window.onload = function() {
+            alert("请使用PC端，浏览器全屏！！！");
+        }
+    </script>
+
+</head>
+<body>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+<div class='container' style="border: 1px black solid; margin-top: 150px; border-radius: 10px; background-image: linear-gradient(#e66465, #9198e5);">
+    <div style="margin-top: 50px; margin-bottom: 50px;">
+        <h1 class='text-center' style="margin-bottom: 38px;">教师管理系统</h1>
+        <div style="margin-bottom: 30px; margin-top: -10px">
+            <h5 class="text-center" th:if="${flag == 9}" style="color: #d8ff00;">用户名密码错误</h5>
+            <h5 class="text-center" th:unless="${flag == 9}" style="color: #00ffff;">请输入用户名密码</h5>
+        </div>
+        <form class="form-horizontal" role="form" action="loginProcess" method="POST">
+            <!-- 账号 -->
+            <div class="form-group" style="margin-bottom: 38px;">
+                <label for="email" class="col-md-offset-3 col-md-1 h4 text-right">账号:</label>
+                <div class="col-md-4">
+                    <input name="email" id="email" class="form-control input-lg" placeholder="Email"/>
+                </div>
+            </div>
+            <!-- 密码 -->
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="password" class="col-md-offset-3 col-md-1 h4 text-right">密码:</label>
+                <div class="col-md-4">
+                    <input name="password" id="password" class="form-control input-lg" placeholder="Password"/>
+                </div>
+            </div>
+            <!-- 记住密码 -->
+            <!-- 提交 -->
+            <div class="form-group" style="margin-bottom: 20px;">
+                <div class="checkbox col-md-offset-4 col-md-1">
+                    <label>
+                        <input type="checkbox" name="remember" value="true">记住我
+                    </label>
+                </div>
+                <a href="forget" class="col-md-offset-1 col-md-2 text-center h5" style="text-decoration: none;">忘记密码</a>
+            </div>
+            <!-- 提交 -->
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-2 text-center">
+                    <button type="submit" href="#" class="btn btn-success">登 录</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

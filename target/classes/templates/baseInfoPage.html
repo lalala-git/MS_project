@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+<div class="container">
+    <div class="row">
+        <span class="h3 col-md-12 text-center">个人信息</span>
+    </div>
+    <hr/>
+    <table class="table table-striped h4">
+        <tr>
+            <td class="text-center">姓名</td>
+            <td th:text="${session.user.name}">张三</td>
+        </tr>
+        <tr>
+            <td class="text-center">性别</td>
+            <td th:text="${session.user.sex}">男</td>
+        </tr>
+        <tr>
+            <td class="text-center">年龄</td>
+            <td th:text="${session.user.age}">18</td>
+        </tr>
+        <tr>
+            <td class="text-center">生日</td>
+            <td th:text="${session.user.bir}">8-9</td>
+        </tr>
+        <tr>
+            <td class="text-center">星座</td>
+            <td th:text="${session.user.constellation}">巨蟹</td>
+        </tr>
+        <tr>
+            <td class="text-center">Email</td>
+            <td th:text="${session.user.email}">root@qq.com</td>
+        </tr>
+        <tr>
+            <td class="text-center">手机号</td>
+            <td th:text="${session.user.phone}">110</td>
+        </tr>
+        <tr>
+            <td class="text-center">头像</td>
+            <td>
+                <img th:src="${session.user.thumb}" style="width: 200px"/>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

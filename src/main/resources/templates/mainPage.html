@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css" />
+    <script src="https://www.layuicdn.com/layui/layui.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <!-- head left -->
+            <div class="layui-logo layui-hide-xs layui-bg-black">
+                <span style="color:#009688">教师管理系统</span>
+            </div>
+            <!-- head mid -->
+<!--            <ul class="layui-nav layui-layout-left">-->
+<!--                <li class="layui-nav-item layui-hide-xs"><a href="#">nav 1</a></li>-->
+<!--                <li class="layui-nav-item layui-hide-xs"><a href="#">nav 2</a></li>-->
+<!--                <li class="layui-nav-item layui-hide-xs"><a href="#">nav 3</a></li>-->
+<!--            </ul>-->
+            <!-- head right -->
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                    <a href="baseInfo" target="sonPage">
+                        <img th:src="${session.user.thumb}" class="layui-nav-img">
+                        <span th:text="${session.user.email}"></span>
+                    </a>
+                </li>
+                <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+                    <a href="logout">
+                        <i class="layui-icon layui-icon-logout" style="font-size: 20px; color:#009688"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- left side -->
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+<!--                    <li class="layui-nav-item layui-nav-itemed">-->
+<!--                        <a class="" href="javascript:;">menu group 1</a>-->
+<!--                        <dl class="layui-nav-child">-->
+<!--                            <dd><a href="javascript:;">menu 1</a></dd>-->
+<!--                            <dd><a href="javascript:;">menu 2</a></dd>-->
+<!--                            <dd><a href="javascript:;">menu 3</a></dd>-->
+<!--                        </dl>-->
+<!--                    </li>-->
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <if th:if="${session.user.position} == '0'">管理员功能</if>
+                            <if th:if="${session.user.position} == '1'">教师功能</if>
+                            <if th:if="${session.user.position} == '2'">学生功能</if>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <if th:if="${session.user.position} == '0'">
+                                <dd><a href="teacherInfo" target="sonPage">查看教职工账号</a></dd>
+                                <dd><a href="studentInfo" target="sonPage">查看学生账号</a></dd>
+                                <dd><a href="uploadAndDownload" target="sonPage">数据导入导出</a></dd>
+                            </if>
+                            <if th:if="${session.user.position} == '1'">
+                                <dd><a href="querySubject" target="sonPage">查看所授学科</a></dd>
+                                <dd><a href="uploadAndDownload" target="sonPage">数据导入导出</a></dd>
+                            </if>
+                            <if th:if="${session.user.position} == '2'">
+                                <dd><a href="qryScore" target="sonPage">查看成绩</a></dd>
+                                <dd><a href="uploadAndDownload" target="sonPage">数据导入导出</a></dd>
+                            </if>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="changeInfo" target="sonPage">修改个人信息</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="layui-body">
+            <div style="padding: 15px;">
+                <iframe name="sonPage"
+                        marginwidth="0"
+                        marginheight="0"
+                        width="100%"
+                        id="urlIframe"
+                        frameborder="0"
+                        scrolling="no"
+                        onload="reinitIframe()"
+                ></iframe>
+            </div>
+        </div>
+    </div>
+    <script>
+        function reinitIframe() {
+            var iframe = document.getElementById("urlIframe");
+            try {
+                var bHeight = iframe.contentWindow.document.body.scrollHeight;
+                iframe.height = bHeight;
+            } catch (ex) { }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyds.dao.StudentScoreInfoDao">
+
+    <select id="selectCountBySubject" resultType="java.lang.Integer">
+        select count(*) from student_score_info
+        where t_teacher_user_id = #{teacherUserId}
+        and t_subject = #{subject}
+        group by t_subject
+    </select>
+
+    <resultMap id="ScoreMap" type="studentSubjectInfo">
+        <id column="t_user_id" property="userId"/>
+        <result column="t_email" property="email"/>
+        <result column="t_name" property="name"/>
+        <result column="t_score" property="score"/>
+    </resultMap>
+    <select id="selectScoreList" resultMap="ScoreMap">
+        select s.t_user_id as t_user_id,
+            u.t_email as t_email,
+            u.t_name as t_name,
+            s.t_score as t_score
+        from student_score_info as s
+        inner join user_base_info as u
+        on s.t_user_id = u.t_user_id
+        where s.t_teacher_user_id = #{teacherUserId}
+        and s.t_subject = #{subject}
+    </select>
+
+    <insert id="insertSubject" parameterType="studentScoreInfo">
+        insert into student_score_info values(
+        #{studentScoreInfo.userId},
+        #{studentScoreInfo.subject},
+        #{studentScoreInfo.score},
+        #{studentScoreInfo.teacherUserId}
+        )
+    </insert>
+
+    <delete id="deleteSubjectFor">
+        delete from student_score_info where t_user_id = #{userId} and t_subject = #{subject}
+    </delete>
+
+    <update id="updateScoreFor">
+        update student_score_info set t_score = #{score} where t_user_id = #{userId} and t_subject = #{subject}
+    </update>
+
+    <resultMap id="StudentScoreInfoMap" type="studentScoreInfo">
+        <id property="userId" column="t_user_id"/>
+        <result property="subject" column="t_subject"/>
+        <result property="score" column="t_score"/>
+        <result property="teacherUserId" column="t_teacher_user_id"/>
+    </resultMap>
+    <select id="selectScoreInfoByUser" resultMap="StudentScoreInfoMap">
+        select * from student_score_info where t_user_id = #{userId}
+    </select>
+
+</mapper>

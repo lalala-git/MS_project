@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+
+<div calss="container">
+    <div class="row">
+        <span class="h3 col-md-12 text-center">更改学生信息</span>
+    </div>
+    <hr/>
+    <form class="form-horizontal" role="form" action="reloadStudent" method="POST">
+        <input name="userId" th:value="${userId}" type="hidden"/>
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email" class="col-md-offset-3 col-md-1 h4 text-right">Email:</label>
+            <div class="col-md-4">
+                <input disabled th:value="${email}" id="email" class="form-control input-lg" placeholder="Email"/>
+            </div>
+        </div>
+        <!-- 姓名 -->
+        <div class="form-group">
+            <label for="name" class="col-md-offset-3 col-md-1 h4 text-right">Name:</label>
+            <div class="col-md-4">
+                <input required th:value="${name}" id="name" name="name" class="form-control input-lg" placeholder="Name"/>
+            </div>
+        </div>
+        <!-- 手机号 -->
+        <div class="form-group">
+            <label class="col-md-offset-3 col-md-1 h4 text-right">手机号:</label>
+            <div class="col-md-4">
+                <input required th:if="${phone == 'null'}" name="phone" class="form-control input-lg" placeholder="Phone"/>
+                <input required th:unless="${phone == 'null'}" th:value="${phone}" name="phone" class="form-control input-lg" placeholder="Phone"/>
+            </div>
+        </div>
+        <!-- 提交 -->
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-2 text-center">
+                <button type="submit" class="btn btn-lg btn-success" style="margin-top: 12px">修 改</button>
+            </div>
+            <div class="col-md-1 h2">
+                <span id="back" class="glyphicon glyphicon-log-in"></span>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    document.getElementById("back").onclick = function() {
+        history.back();
+    }
+</script>
+</body>
+</html>

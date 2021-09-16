@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+<div calss="container">
+    <div class="row">
+        <span class="h3 col-md-12 text-center">更改个人信息</span>
+    </div>
+    <hr/>
+    <form class="form-horizontal" role="form" action="toChangeInfo" method="POST">
+        <!-- 头像 -->
+        <div class="form-group">
+            <label for="thumb" class="col-md-offset-3 col-md-1 h4 text-right">头像:</label>
+            <div class="col-md-4">
+                <input th:value="${session.user.thumb}" name="thumb" id="thumb" class="form-control input-lg" required placeholder="Thumb"/>
+            </div>
+        </div>
+        <!-- 姓名 -->
+        <div class="form-group">
+            <label for="name" class="col-md-offset-3 col-md-1 h4 text-right">姓名:</label>
+                <div class="col-md-4">
+                    <input th:value="${session.user.name}" name="name" id="name" class="form-control input-lg" required placeholder="Name"/>
+            </div>
+        </div>
+        <!-- 年龄 -->
+        <div class="form-group">
+            <label for="age" class="col-md-offset-3 col-md-1 h4 text-right">年龄:</label>
+            <div class="col-md-4">
+                <input th:value="${session.user.age}" type="number" name="age" id="age" class="form-control input-lg" required placeholder="Age"/>
+            </div>
+        </div>
+        <!-- 性别 -->
+        <div class="form-group">
+            <label class="col-md-offset-3 col-md-1 h4 text-right">性别:</label>
+            <label class="col-md-1 h4">
+                <input type="radio" name="sex" checked value="男"> 男
+            </label>
+            <label class="col-md-1 h4">
+                <input type="radio" name="sex" value="女"> 女
+            </label>
+        </div>
+        <!-- 出生年月 -->
+        <div class="form-group">
+            <label for="bir" class="col-md-offset-3 col-md-1 h4 text-right">出生年月:</label>
+            <div class="col-md-4">
+                <input type="date" name="bir" id="bir" class="form-control input-lg" required placeholder="Bir"/>
+            </div>
+        </div>
+        <!-- 星座 -->
+        <div class="form-group">
+            <label for="constellation" class="col-md-offset-3 col-md-1 h4 text-right">星座:</label>
+            <div class="col-md-4">
+                <select id="constellation" name="constellation" required class="form-control input-lg">
+                    <option value="白羊座">白羊座</option>
+                    <option value="金牛座">金牛座</option>
+                    <option value="双子座">双子座</option>
+                    <option value="巨蟹座">巨蟹座</option>
+                    <option value="狮子座">狮子座</option>
+                    <option value="处女座">处女座</option>
+                    <option value="天秤座">天秤座</option>
+                    <option value="天蝎座">天蝎座</option>
+                    <option value="射手座">射手座</option>
+                    <option value="摩羯座">摩羯座</option>
+                    <option value="水瓶座">水瓶座</option>
+                    <option value="双鱼座">双鱼座</option>
+                </select>
+            </div>
+        </div>
+        <!-- 手机号 -->
+        <div class="form-group">
+            <label for="phone" class="col-md-offset-3 col-md-1 h4 text-right">手机号:</label>
+            <div class="col-md-4">
+                <input th:value="${session.user.phone}" name="phone" id="phone" class="form-control input-lg" required placeholder="Phone"/>
+            </div>
+        </div>
+        <!-- 提交 -->
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-2 text-center">
+                <button type="submit" href="toChangeInfo" class="btn btn-lg btn-success">修 改</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

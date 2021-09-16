@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+<div class="container">
+    <div class="row">
+                <span class="h3 col-md-12 text-center">
+                    查看成绩
+                </span>
+    </div>
+    <hr/>
+    <table class="table h4 text-center">
+        <tr>
+            <th class="text-center">学科</th>
+            <th class="text-center">成绩</th>
+        </tr>
+        <tr th:each="item:${studentScoreInfos}">
+            <td th:text="${item.subject}"></td>
+            <td th:text="${item.score}"></td>
+        </tr>
+    </table>
+</body>
+</html>

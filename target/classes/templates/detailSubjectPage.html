@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <div class="container">
+        <div class="row">
+            <span class="h3 col-md-12 text-center">学生成绩</span>
+        </div>
+        <hr/>
+        <table class="table h4 text-center table-bordered">
+            <tr style="background:rgb(240, 240, 240)">
+                <th class="text-center">Email</th>
+                <th class="text-center">姓名</th>
+                <th class="text-center">成绩</th>
+                <th></th>
+                <th class="text-center">
+                    <a th:href="'addStudentSubject?subject=' + ${subject}" class="btn btn-success btn-sm">添加</a>
+                </th>
+            </tr>
+            <tr th:each="item:${studentSubjectPage.studentSubjectInfos}">
+                <td th:text="${item.email}">2741387650@qq.com</td>
+                <td th:text="${item.name}">张三</td>
+                <td th:text="${item.score}">100</td>
+                <td>
+                    <a th:href="'changeStudentSubject?subject=' + ${subject} +
+                    '&userId=' + ${item.userId} +
+                    '&score=' + ${item.score}" class="btn btn-warning btn-sm">修改</a>
+                </td>
+                <td>
+                    <a th:href="'deleteStudentSubject?subject=' + ${subject} + '&userId=' + ${item.userId}" class="btn btn-danger btn-sm">删除</a>
+                </td>
+            </tr>
+        </table>
+        <table class="table h4 text-center">
+            <tr>
+                <td>
+                    <a th:if="${studentSubjectPage.isFirstPage}" class="btn btn-default" disabled style="text-decoration: none;">首页</a>
+                    <a th:unless="${studentSubjectPage.isFirstPage}" class="btn btn-default" style="text-decoration: none;" href="detailSubject?pageNo=1">首页</a>
+                </td>
+                <td>
+                    <a th:if="${studentSubjectPage.isFirstPage}" class="btn btn-default" disabled style="text-decoration: none;">上一页</a>
+                    <a th:unless="${studentSubjectPage.isFirstPage}" class="btn btn-default" style="text-decoration: none;" th:href="'detailSubject?pageNo=' + ${studentSubjectPage.prePage}">上一页</a>
+                </td>
+                <td>
+                    第 <span th:text="${studentSubjectPage.nowPage}"></span> 页
+                </td>
+                <td>
+                    <a th:if="${studentSubjectPage.isLastPage}" class="btn btn-default" disabled style="text-decoration: none;">下一页</a>
+                    <a th:unless="${studentSubjectPage.isLastPage}" class="btn btn-default" style="text-decoration: none;" th:href="'detailSubject?pageNo=' + ${studentSubjectPage.nextPage}">下一页</a>
+                </td>
+                <td>
+                    <a th:if="${studentSubjectPage.isLastPage}" class="btn btn-default" disabled style="text-decoration: none;">尾页</a>
+                    <a th:unless="${studentSubjectPage.isLastPage}" class="btn btn-default" style="text-decoration: none;" th:href="'detailSubject?pageNo=' + ${studentSubjectPage.lastPage}">尾页</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" calss="text-center">
+                    <div class="h2">
+                        <a th:href="'querySubject?pageNo=' + ${studentSubjectPage.nowPage}" style="text-decoration: none" class="glyphicon glyphicon-log-in"></a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

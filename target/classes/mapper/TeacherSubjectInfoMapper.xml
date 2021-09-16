@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyds.dao.TeacherSubjectInfoDao">
+    <resultMap id="SubjectMap" type="teacherSubjectInfo">
+        <id property="userId" column="t_user_id"/>
+        <result property="subject" column="t_subject"/>
+    </resultMap>
+    <select id="selectSubjectByUser" resultMap="SubjectMap">
+        select * from teacher_subject_info where t_user_id = #{userId}
+    </select>
+
+    <delete id="deleteSubject">
+        delete from teacher_subject_info where t_user_id = #{userId} and t_subject = #{subject}
+    </delete>
+
+    <insert id="insertSubject">
+        insert into teacher_subject_info values (#{userId}, #{subject})
+    </insert>
+
+</mapper>
