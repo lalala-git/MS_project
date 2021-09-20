@@ -5,8 +5,9 @@ use ms;
 create table user_base_info (
 	t_user_id bigint auto_increment primary key,
     t_email varchar(50) not null,
+    t_name varchar(50) not null,
     t_password varchar(50) not null,
-    t_thumb varchar(50) not null,
+    t_thumb varchar(500) not null,
     t_position int(1) not null,
     t_age int(3),
     t_sex varchar(10),

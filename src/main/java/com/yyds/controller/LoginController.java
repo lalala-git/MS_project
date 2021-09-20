@@ -28,15 +28,17 @@ public class LoginController {
         //首先判断是否有cookie并判断正确性
         //如果cookie存在并合法，将user存入session中，重定向到mainPage
         Cookie[] cookies = request.getCookies();
-        for(Cookie cookie : cookies) {
-            if("user".equals(cookie.getName())) {
-                String userInfo = cookie.getValue();
-                String email = userInfo.split("-")[0];
-                String password = userInfo.split("-")[1];
-                UserBaseInfo userBaseInfo = loginService.checkEmailAndPassword(email, password);
-                if(userBaseInfo != null) {
-                    request.getSession().setAttribute("user", userBaseInfo);
-                    return "redirect:main";
+        if(cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("user".equals(cookie.getName())) {
+                    String userInfo = cookie.getValue();
+                    String email = userInfo.split("-")[0];
+                    String password = userInfo.split("-")[1];
+                    UserBaseInfo userBaseInfo = loginService.checkEmailAndPassword(email, password);
+                    if (userBaseInfo != null) {
+                        request.getSession().setAttribute("user", userBaseInfo);
+                        return "redirect:main";
+                    }
                 }
             }
         }

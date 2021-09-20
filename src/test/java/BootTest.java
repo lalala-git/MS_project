@@ -1,4 +1,5 @@
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.digest.MD5;
 import com.yyds.PortalApplication;
 import com.yyds.dao.UserBaseInfoDao;
 import com.yyds.domain.UserBaseInfo;
@@ -26,6 +27,5 @@ public class BootTest {
         String securePassword = SecureUtil.md5("root");
         System.out.println(securePassword);
     }
-
 
 }
